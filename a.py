@@ -11,17 +11,14 @@ def createCanvas(color):
     return canvas
 
 
-# Display an image using OpenCV press any key to close the image, set the image width and height
-def displayImage(image):
-    cv2.imshow("Image", image)
+# Display two images using OpenCV in two different windows press key 'q' to close the window
+# set the window title with Canvas and Palette
+def displayImage(images):
+    cv2.imshow("Canvas", images[0])
+    cv2.imshow("Palette", images[1])
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-
-# Load the color palette
-def loadPalette():
-    palette = cv2.imread("img/palette.jpeg")
-    return palette
 
 
 if __name__ == '__main__':
@@ -29,8 +26,8 @@ if __name__ == '__main__':
     # Use the createCanvas function
     # you have written above
     canvas = createCanvas((255, 255, 255))
+    # Load the color palette,set the image width and height to 300
+    palette = cv2.imread("img/palette.jpeg", cv2.IMREAD_UNCHANGED)
+    palette = cv2.resize(palette, (300, 300))
     # Display the canvas and  Use the functions you have written above
-    displayImage(canvas)
-    # Display the color palette and  Use the functions you have written above
-    palette = loadPalette()
-    displayImage(palette)
+    displayImage([canvas, palette])
